@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Statement of Marks</title>
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            background: #f2f2f2;
+            padding: 40px;
+        }
+
+        .marksheet {
+            background: white;
+            width: 750px;
+            margin: auto;
+            padding: 30px;
+            border: 2px solid #000;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        .student-info {
+            margin-bottom: 20px;
+        }
+
+        .student-info p {
+            margin: 6px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background: #e6e6e6;
+        }
+
+        .summary {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f9f9f9;
+            border: 2px solid black;
+        }
+
+        .summary p {
+            margin: 8px 0;
+        }
+
+        .total-mark {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .percentage-mark {
+            font-size: 26px;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .pass {
+            color: green;
+            font-weight: bold;
+        }
+
+        .fail {
+            color: red;
+            font-weight: bold;
+        }
+
+        .print-btn {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .print-btn button {
+            padding: 8px 15px;
+            background: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .print-btn button:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<body>
+
+<div class="marksheet">
+{% if student %}
+
+<div class="header">
+    <h1>STATEMENT OF MARKS</h1>
+    <p>Academic Examination Result</p>
+</div>
+
+<div class="student-info">
+    <p><strong>Name:</strong> {{ student.name }}</p>
+    <p><strong>Roll Number:</strong> {{ student.roll_number }}</p>
+</div>
+
+<table>
+    <tr>
+        <th>Subject</th>
+        <th>Marks Obtained</th>
+        <th>Maximum Marks</th>
+    </tr>
+    <tr>
+        <td>Mathematics</td>
+        <td>{{ marks.maths }}</td>
+        <td>100</td>
+    </tr>
+    <tr>
+        <td>English</td>
+        <td>{{ marks.english }}</td>
+        <td>100</td>
+    </tr>
+    <tr>
+        <td>Science</td>
+        <td>{{ marks.science }}</td>
+        <td>100</td>
+    </tr>
+    <tr>
+        <td>Computer</td>
+        <td>{{ marks.computer }}</td>
+        <td>100</td>
+    </tr>
+    <tr>
+        <td>Social</td>
+        <td>{{ marks.social }}</td>
+        <td>100</td>
+    </tr>
+</table>
+
+<div class="summary">
+    <p class="total-mark">Total Marks: {{ marks.total }} / 500</p>
+
+    <p class="percentage-mark">
+        Percentage: {{ marks.percentage }}%
+    </p>
+
+    <p>Grade: {{ grade }}</p>
+
+    <p>
+        Result:
+        {% if status == "PASS" %}
+            <span class="pass">{{ status }}</span>
+        {% else %}
+            <span class="fail">{{ status }}</span>
+        {% endif %}
+    </p>
+</div>
+
+<div class="print-btn">
+    <button onclick="window.print()">Print Marksheet</button>
+</div>
+
+{% else %}
+    <h2>Student Not Found</h2>
+{% endif %}
+</div>
+
+</body>
+</html>
